@@ -1,6 +1,6 @@
 // A class component can be defined as an ES6 class
 // that extends the base Component class included in the React library
-class GroceryListItem extends React.Component {
+class TodoListItem extends React.Component {
 
   // A `constructor` method is expected on all ES6 classes
   // When React instantiates the component,
@@ -17,7 +17,7 @@ class GroceryListItem extends React.Component {
 
   // When a list item is clicked, we will toggle the `done`
   // boolean, and our component's `render` method will run again
-  onGroceryItemClick() {
+  onListItemClick() {
     this.setState({
       done: !this.state.done
     });
@@ -29,7 +29,7 @@ class GroceryListItem extends React.Component {
     // Making the style conditional on our `state` lets us
     // update it based on user interactions.
     var style = {
-      fontWeight: this.state.done ? 'bold' : 'normal'
+      textDecoration: this.state.done ? 'line-through' : 'none'
     };
 
     // `props` is no longer passed as an argument,
@@ -37,19 +37,19 @@ class GroceryListItem extends React.Component {
     return (
       // You can pass inline styles using React's `style` attribute to any component
       // snake-cased css properties become camelCased this this object
-      <li style={style} onClick={this.onGroceryItemClick.bind(this)}>{this.props.grocery}</li>
+      <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.todo}</li>
     );
 
   }
 
 }
 
-// Update our `GroceryList` to use the new `GroceryListItem` component
+// Update our `TodoList` to use the new `TodoListItem` component
 // This can still be a stateless function component!
-var GroceryList = (props) => (
+var TodoList = (props) => (
   <ul>
-    {props.groceries.map(grocery =>
-      <GroceryListItem grocery={grocery} />
+    {props.todos.map(todo =>
+      <TodoListItem todo={todo} />
     )}
   </ul>
 );
@@ -58,7 +58,7 @@ var GroceryList = (props) => (
 var App = () => (
   <div>
     <h2>My Todo List</h2>
-    <GroceryList groceries={['Cupcakes', 'Beer', 'Mangos']}/>
+    <TodoList todos={['Learn React', 'Crush Recast.ly', 'Maybe sleep']}/>
   </div>
 );
 
